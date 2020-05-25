@@ -3,3 +3,4 @@ yarn-error.log
 tmp/*
 !tmp/.gitkeep
 coverage/*
+README.md
