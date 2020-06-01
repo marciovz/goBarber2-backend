@@ -2,7 +2,7 @@ import { uuid } from 'uuidv4';
 import { isEqual, getMonth, getYear, getDate } from 'date-fns';
 
 import IAppointmentsRepository from '@modules/appointments/repositories/IAppointmentsRepository';
-import IAppointmentmentDTO from '@modules/appointments/dtos/ICreateAppointmentDTO';
+import ICreateAppointmentDTO from '@modules/appointments/dtos/ICreateAppointmentDTO';
 import IFindAllInMonthFromProviderDTO from '@modules/appointments/dtos/IFindAllInMonthFromProviderDTO';
 import IFindAllInDayFromProviderDTO from '@modules/appointments/dtos/IFindAllInDayFromProviderDTO';
 
@@ -20,7 +20,7 @@ class AppointmentsRepository implements IAppointmentsRepository {
   }
 
   public async findAllInMonthFromProvider({ provider_id, month, year }: IFindAllInMonthFromProviderDTO): Promise<Appointment[]> {
-    const appointment = this.appointments.filter(appointment => {
+    const appointments = this.appointments.filter(appointment => {
       return (
         appointment.provider_id === provider_id &&
         getMonth(appointment.date) + 1 === month &&
@@ -28,7 +28,7 @@ class AppointmentsRepository implements IAppointmentsRepository {
       );
     });
 
-    return appointment;
+    return appointments;
   }
 
   public async findAllInDayFromProvider({ provider_id, day, month, year }: IFindAllInDayFromProviderDTO): Promise<Appointment[]> {
@@ -48,7 +48,7 @@ class AppointmentsRepository implements IAppointmentsRepository {
     provider_id,
     user_id,
     date,
-  }: IAppointmentmentDTO): Promise<Appointment> {
+  }: ICreateAppointmentDTO): Promise<Appointment> {
     const appointment = new Appointment();
 
     Object.assign(appointment, { id: uuid(), date, provider_id, user_id });
