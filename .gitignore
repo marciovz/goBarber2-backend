@@ -1,6 +1,9 @@
 node_modules
 yarn-error.log
-tmp/*
-!tmp/.gitkeep
 coverage/*
 README.md
+.env
+ormconfig.json
+
+tmp/*
+!tmp/.gitkeep
